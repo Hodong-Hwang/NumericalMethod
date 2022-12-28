@@ -41,6 +41,10 @@
 *.vcxproj.filters 
 *.filters
 
+*.tlog
+*.recipe
+*.pdb
+
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
