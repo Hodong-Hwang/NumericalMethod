@@ -35,6 +35,12 @@
 *.out
 *.app
 
+# Proejct File and solution
+*.vcxproj
+*.sln
+*.vcxproj.filters 
+*.filters
+
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
