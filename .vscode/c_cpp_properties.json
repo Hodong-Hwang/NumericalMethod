@@ -4,7 +4,8 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${INCLUDE}/**"
+                "${MATPLOTLIB}/**",
+                "${EIGEN_INCLUDE}/**"
             ],
             "defines": [
                 "_DEBUG",

@@ -23,15 +23,21 @@ class Tropozodial : public ClosedIntegral<T>{
 };
 
 template<class T>
-class Simpson : public ClosedIntegral<T>{
+class SimpsonThird : public ClosedIntegral<T>{
     public:
-    Simpson(){classname="Simpson";}
+    SimpsonThird(){classname="SimpsonThird";}
     T get_Answer(funcptr fcn, T a, T b, int step);
-    // T ThreePointMethod(funcptr fcn, T x0);
-    // T FourPointMethod(funcptr fcn, T x0);
 
 };
 
+template<class T>
+class SimpsonFourth : public ClosedIntegral<T>{
+    public:
+    SimpsonFourth(){classname="SimpsonFourth";}
+    T get_Answer(funcptr fcn, T a, T b, int step);
+
+
+};
 
 
 #endif

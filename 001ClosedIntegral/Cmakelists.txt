@@ -7,7 +7,7 @@ add_executable (${PROJECT_NAME} closedintegral.cpp)
 FIND_PACKAGE(Eigen3 REQUIRED)
 FIND_PACKAGE(Python3 COMPONENTS Interpreter Development NumPy)
 
-add_compile_options(-std:c++17) #optional to use c++17
+add_compile_options(-std:c++11) #optional to use c++17
 
 
 target_include_directories(
