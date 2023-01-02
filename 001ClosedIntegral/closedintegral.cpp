@@ -1,4 +1,4 @@
-#include "../include/closedintegral.h"
+#include "../Include/closedintegral.h"
 #include <iostream>
 
 template<class T>

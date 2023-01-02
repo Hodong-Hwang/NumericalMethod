@@ -56,4 +56,6 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 _deps
+
+*.ilk
 # End of https://www.toptal.com/developers/gitignore/api/c++
