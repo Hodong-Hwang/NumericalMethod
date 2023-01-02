@@ -1,6 +1,6 @@
 #ifndef __CLOSEDINTEGRAL_H__
 #define __CLOSEDINTEGRAL_H__
-#include "../common/NumericalObject.h"
+#include "NumericalObject.h"
 #include <matplotlibcpp.h>
 #include <vector>
 namespace plt = matplotlibcpp;
@@ -39,5 +39,7 @@ class SimpsonFourth : public ClosedIntegral<T>{
 
 };
 
+template <class T>
+T testfunction(T x);
 
 #endif

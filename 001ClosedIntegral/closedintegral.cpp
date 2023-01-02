@@ -1,4 +1,4 @@
-#include "closedintegral.h"
+#include "../include/closedintegral.h"
 #include <iostream>
 
 template<class T>
@@ -114,11 +114,11 @@ void SimposonForthExample()
     }
 
 }
-int main ()
-{
-    TropozodialExample();
-    SimposonExample();
-    SimposonForthExample();
+// int main ()
+// {
+//     TropozodialExample();
+//     SimposonExample();
+//     SimposonForthExample();
 
-    return 0;
-}
+//     return 0;
+// }

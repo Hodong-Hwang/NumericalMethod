@@ -4,7 +4,7 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${MATPLOTLIB}/**",
+                "${MATPLOTLIB_INCLUDE}/**",
                 "${EIGEN_INCLUDE}/**"
             ],
             "defines": [
@@ -16,7 +16,7 @@
             "compilerPath": "C:/mingw64/bin/g++.exe",
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "intelliSenseMode": "gcc-x64"
+            "intelliSenseMode": "msvc-x64"
         }
     ],
     "version": 4
