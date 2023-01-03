@@ -2,7 +2,6 @@
 #include "../Include/closedintegral.h"
 #include <iostream> 
 #include <cmath>
-#include <stack>
 template <class T>
 T AdpativeMethod<T>::adtQuad(T a, T b, double tol){
     
@@ -20,10 +19,10 @@ T AdpativeMethod<T>::adtQuad(T a, T b, double tol){
     fc=fptr(c);
     fd=fptr(d);
     fe=fptr(e);
-    std::stack<std::pair<T, T>> s{a,b};
     // Simposon'Third method
     I1= h1*(fa+4*fc+fb)/6;
     I2= h2*(fa+4*fd+2*fc+4*fe+fb)/6;
+    // will be updated with stack algorithm 
     if(abs(I2-I1)<= tol){
         ans=(I2+(I2-I1)/15); //boole's rule;
     }

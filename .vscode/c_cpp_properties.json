@@ -5,7 +5,9 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${MATPLOTLIB_INCLUDE}/**",
-                "${EIGEN_INCLUDE}/**"
+                "${EIGEN_INCLUDE}/**",
+                "${PYTHON_INCLUDE}/**",
+                "${NUMPY_INCLUDE}/**"
             ],
             "defines": [
                 "_DEBUG",
@@ -16,7 +18,7 @@
             "compilerPath": "C:/mingw64/bin/g++.exe",
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "intelliSenseMode": "msvc-x64"
+            "intelliSenseMode": "gcc-x86"
         }
     ],
     "version": 4

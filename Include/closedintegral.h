@@ -40,6 +40,11 @@ class SimpsonFourth : public ClosedIntegral<T>{
 };
 
 template <class T>
-T testfunction(T x);
+template <class T>
+T testfunction(T x)
+{
+    return (0.2+25*x-200*x*x+675*x*x*x-900*x*x*x*x+400*x*x*x*x*x);
+}
+
 
 #endif

@@ -1,13 +1,13 @@
 #ifndef __GAUSSQUADRATURE_H__
 #define __GAUSSQUADRATURE_H__
-#include "NumericalObject.h"
+#include "IntergalMethod.h"
 template <class T>
-class GaussQuadrature: public NumericalObject
+class GaussQuadrature: public IntergralMethod<T>
 {
-    private:
-
     public:
     GaussQuadrature(){classname="GaussQuadrature";}
     T Integral(T a, T b);
 };
+
+
 #endif

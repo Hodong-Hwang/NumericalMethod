@@ -6,7 +6,6 @@ add_executable (${PROJECT_NAME} closedintegral.cpp ../Include/closedintegral.h)
 
 FIND_PACKAGE(Eigen3 REQUIRED)
 FIND_PACKAGE(Python3 COMPONENTS Interpreter Development NumPy)
-add_library(${PROJECT_NAME} STATIC )
 
 add_compile_options(-std:c++11) #optional to use c++17
 
