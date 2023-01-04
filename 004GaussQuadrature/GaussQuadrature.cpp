@@ -1,8 +1,7 @@
 #include "../Include/GaussQuadrature.h"
 #include <cmath>
-#include <iostream>
 template<class T>
-T GaussQuadrature<T>::Integral(T a, T b)
+inline T GaussQuadrature<T>::Integralfixed(T a, T b)
 {
     T ans,x1,x2,root1,root2;
     // two point method;
@@ -13,10 +12,21 @@ T GaussQuadrature<T>::Integral(T a, T b)
     ans = (fptr(x1)+fptr(x2))*(b-a)/2;
     return ans;
 }
-int main ()
-{
-    GaussQuadrature<double> test;
 
-    std::cout << test.Integral(0,0.8) <<std::endl;
-    return 0; 
+template<class T>
+T GaussQuadrature<T>::Integral(T a, T b)
+{
+    double tol = 1e-6;
+    T I1,I2,err,c,ans;
+    // two point method;
+    c=(a+b)/2;
+    I1=Integralfixed(a,b);
+    I2=Integralfixed(a,c)+Integralfixed(c,b);
+    err=I2-I1;
+    if(abs(err)<tol)
+    {
+        ans=Ia+Ib; 
+    }
+
+    return ans;
 }

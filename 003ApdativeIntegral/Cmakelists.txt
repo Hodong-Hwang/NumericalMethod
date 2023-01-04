@@ -1,17 +1,46 @@
 cmake_minimum_required (VERSION 3.0)
+
 project (AdpativeIntegral)
-add_executable (${PROJECT_NAME} AdaptiveIntegral.cpp ../Include/AdpativeIntegral.h ../001ClosedIntegral/closedintegral.cpp)
+add_executable (${PROJECT_NAME} main.cpp AdaptiveIntegral.cpp)
 
-# find package
-FIND_PACKAGE(Eigen3 REQUIRED)
-FIND_PACKAGE(Python3 COMPONENTS Interpreter Development NumPy)
-
-add_compile_options(-std:c++11) #optional to use c++17
+add_compile_options(-std:c++17) #optional to use c++17
 target_include_directories(
     ${PROJECT_NAME} PRIVATE 
-    ${CMAKE_SOURCE_DIR}../Include/ 
-    $ENV{MATPLOTLIB_INCLUDE} 
-    ${Python3_INCLUDE_DIRS} 
-    ${Python3_NumPy_INCLUDE_DIRS}
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Include
+
     )
-target_link_libraries(${PROJECT_NAME} Eigen3::Eigen Python3::Python Python3::NumPy)
+# target_link_libraries(${PROJECT_NAME} Eigen3::Eigen Python3::Python Python3::NumPy)
+target_sources(${PROJECT_NAME} PRIVATE AdaptiveIntegral.cpp)
+message(STATUS "Compiler")
+message(STATUS " - ID       \t: ${CMAKE_CXX_COMPILER_ID}")
+message(STATUS " - Version  \t: ${CMAKE_CXX_COMPILER_VERSION}")
+message(STATUS " - Path     \t: ${CMAKE_CXX_COMPILER}")
+
+message(STATUS ${CMAKE_CURRENT_SOURCE_DIR}/../Include) # -- Root
+# https://gist.github.com/dongbum/d1d49e38a20f9cf52ea39f9ce2702160
+# add_library(my_archive  STATIC  # 정적 링킹 라이브러리(.a, .lib)
+#     main.cpp
+#     feature1.cpp
+#     # ...
+# )
+
+# add_library(my_shared_object  SHARED  # 동적 링킹 라이브러리(.so, .dll)
+#     main.cpp
+#     feature1.cpp
+#     # ...
+# )
+
+#add_subdirectory(src)       # 상대경로 // CamkePath
+
+# cmake --build . # ... 지정된 툴을 사용해 빌드를 진행한다 ...
+# cmake --build . --parallel          # 병렬 빌드
+# cmake --build . --target install    # 빌드에 성공하면 설치까지 진행한다
+# cmake --build . --config debug      # Debug로 빌드
+
+
+# # dependency: from -> { to }
+# add_dependencies(module1 module2)            # `module1` requires `module2`
+# add_dependencies(test    module1 module2)    # `test` requires `module1` & `module2`
+
+# 의존성이 공유되어야 하는 경우, 혹은 기타 라이브러리와 함께 사용하는 라이브러리라면 PUBLIC, 
+# 내부 구현에만 사용되고 공개되지 않는 경우라면 PRIVATE에 배치하는 것이 적합합니다.
