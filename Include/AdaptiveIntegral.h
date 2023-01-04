@@ -9,9 +9,9 @@ class AdaptiveMethod : public IntegralMethod<T>
     //AdaptiveMethod(funcptr fptr_) {classname="AdaptiveMethod"; fptr=fptr_;}
     AdaptiveMethod() {classname="AdaptiveMethod";}
     T adtQuad(T a, T b, double tol = 1e-6);
-    //T adtQuadwithStack(T a, T b, double tol = 1e-6);
+    T adtQuadwithStack(T a, T b, double tol = 1e-6);
 };
-AdaptiveMethod<double>;
-AdaptiveMethod<float>;
+
+
 
 # endif 

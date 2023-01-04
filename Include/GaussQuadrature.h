@@ -6,7 +6,7 @@ class GaussQuadrature: public IntegralMethod<T>
 {
     public:
     GaussQuadrature(){classname="GaussQuadrature";}
-    inline T Integral(T a, T b);
+    T Integral(T a, T b);
     T Integralfixed(T a, T b);
 };
 
