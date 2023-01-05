@@ -21,7 +21,6 @@ double MCIntegral(double a, double b, unsigned N)
     }
     return (ymax*(b-a)*count/N);
     // matplotlib add it <plot result and gif generation>
-
 }
 
 int main ()
