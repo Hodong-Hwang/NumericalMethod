@@ -1,7 +1,9 @@
 #include <stdio.h>
-
+#include "gnuplot.h"
 int main ()
 {
+    ChGnuPlot mplot("__tmp_gnuplot_1.gpl");
+
     int x=0,y=0;
     FILE *fp=nullptr;
     FILE *gnupipe =nullptr;
