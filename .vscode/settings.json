@@ -62,6 +62,9 @@
         "valarray": "cpp",
         "any": "cpp",
         "bitset": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "*.inc": "cpp",
+        "alignedvector3": "cpp",
+        "fft": "cpp"
     }
 }

@@ -1,0 +1,27 @@
+cmake_minimum_required (VERSION 3.0)
+project (Heun)
+add_executable (${PROJECT_NAME} Heunclient.cpp ${CMAKE_SOURCE_DIR}/../src/HeunMethod.cpp  )
+
+# find package
+
+add_compile_options(-std:c++11) #optional to use c++17
+
+# need to gnuplot, gnuplot iostream for plotting, Bost library for gnu-iostream..
+FIND_PACKAGE(Eigen3 REQUIRED)
+FIND_PACKAGE(Python3 COMPONENTS Interpreter Development NumPy)
+
+target_include_directories(
+    ${PROJECT_NAME} PRIVATE 
+    ${CMAKE_SOURCE_DIR}/../Include/ 
+    ${CMAKE_SOURCE_DIR}/../src/ 
+    $ENV{MATPLOTLIB_INCLUDE} 
+    ${Python3_INCLUDE_DIRS} 
+    ${Python3_NumPy_INCLUDE_DIRS}
+    )
+target_link_libraries(${PROJECT_NAME} Eigen3::Eigen Python3::Python Python3::NumPy)
+
+
+message(STATUS "Compiler")
+message(STATUS " - ID       \t: ${CMAKE_CXX_COMPILER_ID}")
+message(STATUS " - Version  \t: ${CMAKE_CXX_COMPILER_VERSION}")
+message(STATUS " - Path     \t: ${CMAKE_CXX_COMPILER}")

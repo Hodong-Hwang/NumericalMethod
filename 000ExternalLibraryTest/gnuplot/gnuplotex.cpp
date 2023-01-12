@@ -1,14 +1,11 @@
 #include <stdio.h>
-#include "gnuplot.h"
 int main ()
 {
-    ChGnuPlot mplot("__tmp_gnuplot_1.gpl");
-
     int x=0,y=0;
     FILE *fp=nullptr;
+    fp=fopen("data.tmp","w");
     FILE *gnupipe =nullptr;
     char* GNuCommands[]={"set output 'test.gif'","set title \"Demo\"","plot 'data.tmp'"};
-    fp=fopen("data.tmp","w");
     gnupipe = _popen("gnuplot -persistent","w");
     for (int i=0; i<11;i++){
         fprintf(fp,"%d %d\n",x,y);
