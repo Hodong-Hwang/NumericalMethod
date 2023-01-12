@@ -15,7 +15,7 @@ class EulerMethod : public DiffMethod<T>
     public:
     EulerMethod(T h_): DiffMethod(h_){}
     EulerMethod(T h_,funcptr fptr_): DiffMethod(h_,fptr_){}
-    std::pair<std::vector<T>,std::vector<T>> Solve(T a, T b, T ini);
+    std::pair<std::vector<T>,std::vector<T>> Forward(T a, T b, T ini);
     void set_showResult(bool shoresult_) noexcept {showresult=shoresult_;}
     void resize_Stepszie(double step) noexcept {h=step;}
 

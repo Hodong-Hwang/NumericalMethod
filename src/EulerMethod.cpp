@@ -4,11 +4,7 @@
 template class EulerMethod<double>;
 template class EulerMethod<float>;
 
-template <class T>
-T expFunction (T x)
-{
-    return (4*exp(0.8*x);)
-}
+
 
 template <class T>
 std::pair<std::vector<T>,std::vector<T>> EulerMethod<T>::Forward(T a, T b, T ini)

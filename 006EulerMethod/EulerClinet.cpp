@@ -35,8 +35,8 @@ void testSmaple (){
     auto dom2=result2.first;
     auto ran2=result2.second;
 
-    plt::plot(dom,ran,{{"label", "stepSize=0.5"}});
-    plt::plot(dom2,ran2,{{"label", "stepSize=0.25"}});
+    plt::plot(dom,ran,{{"label", "$h_1=0.5$"}});
+    plt::plot(dom2,ran2,{{"label", "$h_2=0.25$"}});
     plt::plot(xdomain,yrange,{{"label", "Exact Solution"}});
     plt::legend();
     plt::title("StepSzieEffect");
