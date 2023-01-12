@@ -41,19 +41,18 @@ void testSmaple (){
     auto dom=result.first;
     auto ran=result.second;
 
-    // test.resize_Stepszie(stepsize2);
-    // auto result2=test.Solve(xini,xend,yini);
+    auto result2=test.IterativeSolve(xini,xend,yini,15);
 
-    // auto dom2=result2.first;
-    // auto ran2=result2.second;
+    auto dom2=result2.first;
+    auto ran2=result2.second;
 
-    plt::plot(dom,ran,{{"label", "$h_1=0.5$"}});
-    // plt::plot(dom2,ran2,{{"label", "$h_2=0.25$"}});
+    plt::plot(dom,ran,{{"label", "$NoITeration$"}});
+    plt::plot(dom2,ran2,{{"label", "$15 Iteration$"}});
     plt::plot(xdomain,yrange,{{"label", "Exact Solution"}});
     plt::legend();
-    plt::title("StepSzieEffect");
+    plt::title("HeunMethod");
 
-    plt::save("StepSizeEffect.png");
+    plt::save("Heun.png");
 
 }
 int main()
