@@ -25,7 +25,7 @@ class SecondOrder : public RungeKutta<T>
 {
     public:
     SecondOrder(T h_,funcptr2 fptr_):RungeKutta(h_,fptr_){}
-    std::pair<std::vector<T>,std::vector<T>> Solve(T a, T b, T ini);
+    std::pair<std::vector<T>,std::vector<T>> Solve(T a, T b, T ini) override;
 };
 
 template <class T>
@@ -33,14 +33,25 @@ class ThirdOrder : public RungeKutta<T>
 {
     public:
     ThirdOrder(T h_,funcptr2 fptr_):RungeKutta(h_,fptr_){}
-    std::pair<std::vector<T>,std::vector<T>> Solve(T a, T b, T ini);
+    std::pair<std::vector<T>,std::vector<T>> Solve(T a, T b, T ini) override;
 };
 
-// template <class T>
-// class FourthOrder : public: RungeKutta<T>
-// {
-//     public:
-//     std::pair<std::vector<T>,std::vector<T>> Solve(T a, T b, T ini);
-// };
+template <class T>
+class FourthOrder : public RungeKutta<T>
+{
+    public:
+    FourthOrder(T h_,funcptr2 fptr_):RungeKutta(h_,fptr_){}
+    std::pair<std::vector<T>,std::vector<T>> Solve(T a, T b, T ini) override;
+};
+
+
+template <class T>
+class HighOrder : public RungeKutta<T>
+{
+    public:
+    HighOrder(T h_,funcptr2 fptr_):RungeKutta(h_,fptr_){}
+    std::pair<std::vector<T>,std::vector<T>> Solve(T a, T b, T ini) override;
+
+};
 
 #endif
