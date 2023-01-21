@@ -8,6 +8,9 @@ template class SecondOrder<float>;
 template class ThirdOrder<float>;
 template class FourthOrder<float>;
 template class HighOrder<float>;
+// template class FourthOrder<float>::Adaptive;
+// template class FourthOrder<double>::Adaptive;
+
 template <class T>
 std::pair<std::vector<T>,std::vector<T>> SecondOrder<T>::Solve(T a, T b, T ini)
 {
@@ -80,11 +83,7 @@ std::pair<std::vector<T>,std::vector<T>> FourthOrder<T>::Solve(T a, T b, T ini)
     // y_(i+1) = y_i + f(x,y)*h
     std::vector<T> domain;
     std::vector<T> range;
-    T x,y,k1,k2,k3,k4,a1,a2,a3,a4;
-    a1=1;
-    a2=2;
-    a3=2;
-    a4=1;
+    T x,y;
     x=a;
     y=ini;
     for (unsigned i=0; i<step+1; i++)
@@ -93,14 +92,25 @@ std::pair<std::vector<T>,std::vector<T>> FourthOrder<T>::Solve(T a, T b, T ini)
         // Predict Step
         domain.push_back(x);
         range.push_back(y);
-        k1=fptr2(x,y);
-        k2=fptr2(x+0.5*h,y+0.5*k1*h);
-        k3=fptr2(x+0.5*h,y+0.5*k2*h);
-        k4=fptr2(x+h,y+k3*h);
         x+=h;
-        y+=(a1*k1*h+a2*k2*h+a3*k3*h+a4*k4*h)/(a1+a2+a3+a4);
+        y+=get_AverageSlope(x,y,h)*h;
     }
     return std::make_pair(domain,range);    
+}
+
+template <class T>
+T FourthOrder<T>::get_AverageSlope(T x,T y, T h)
+{
+    T k1,k2,k3,k4,a1,a2,a3,a4;
+    a1=1;
+    a2=2;
+    a3=2;
+    a4=1;
+    k1=fptr2(x,y);
+    k2=fptr2(x+0.5*h,y+0.5*k1*h);
+    k3=fptr2(x+0.5*h,y+0.5*k2*h);
+    k4=fptr2(x+h,y+k3*h);
+    return (a1*k1+a2*k2+a3*k3+a4*k4)/(a1+a2+a3+a4);
 }
 
 template <class T>
@@ -134,5 +144,29 @@ std::pair<std::vector<T>,std::vector<T>> HighOrder<T>::Solve(T a, T b, T ini)
         y+=(a1*k1+a2*k2+a3*k3+a4*k4+a5*k5+a6*k6)*h/(suma);
     }
     return std::make_pair(domain,range);    
+}
 
+
+template <class T>
+std::pair<std::vector<T>,std::vector<T>> FourthOrder<T>::Adaptive::Solve(T a, T b, T ini)
+{
+    unsigned step=static_cast<unsigned>(abs(b-a)/h);
+    std::vector<T> domain;
+    std::vector<T> range;
+    T x,prey,corry,Error;
+    x=a;
+    prey=ini;
+    corry=ini;
+
+
+    for (unsigned i=0; i<step+1; i++)
+    {
+        if(showresult)std::cout << "step i =" << i << ", " << "y = " << y <<std::endl;
+        // Predict Step
+        FourthOrder<T>::Solve()
+
+        // Correction
+
+    }
+    return std::make_pair(domain,range);    
 }

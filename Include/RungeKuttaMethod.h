@@ -42,6 +42,14 @@ class FourthOrder : public RungeKutta<T>
     public:
     FourthOrder(T h_,funcptr2 fptr_):RungeKutta(h_,fptr_){}
     std::pair<std::vector<T>,std::vector<T>> Solve(T a, T b, T ini) override;
+    T get_AverageSlope(T x,T y, T h);
+    // template <class T>
+    // class Adaptive : public ForuthOrder<T>
+    // {
+    //     public:
+    //     Adaptive(T h_,funcptr2 fptr_):ForuthOrder(h_,fptr_){}
+    //     std::pair<std::vector<T>,std::vector<T>> Solve(T a, T b, T ini) override;
+    // };
 };
 
 
