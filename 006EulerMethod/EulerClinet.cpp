@@ -40,15 +40,37 @@ void testSmaple (){
     plt::plot(xdomain,yrange,{{"label", "Exact Solution"}});
     plt::legend();
     plt::title("StepSzieEffect");
-
     plt::save("StepSizeEffect.png");
-
 }
+
+void testSystemEquation (){
+    double xini=0;
+    double xend=3;
+    double yini0=4;
+    double yini1=6;
+    double stepsize2=0.25;
+    double x;
+    /// make _Exact Solution
+
+    EulerMethod<double> test(stepsize2);
+    auto result=test.Forward(xini,xend,std::make_pair(yini0,yini1));
+    auto dom=result.first;
+    auto ran=result.second;    
+
+
+    plt::plot(dom,ran.first,{{"label", "$y_1$"}});
+    plt::plot(dom,ran.second,{{"label", "$y_2$"}});
+    plt::legend();
+    plt::title("SystemEquation");
+    plt::save("SystemEquation.png");
+}
+
+
 int main()
 {
 
-    testSmaple();
-
+    //testSmaple();
+    testSystemEquation ();
     return 0;
 
 }

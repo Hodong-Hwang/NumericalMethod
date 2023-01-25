@@ -19,6 +19,8 @@ class HeunMethod : public DiffMethod<T>
     HeunMethod(T h_,funcptr2 fptr_): DiffMethod(h_){fptr2=fptr_;}
 
     std::pair<std::vector<T>,std::vector<T>> Solve(T a, T b, T ini);
+    std::pair<std::vector<std::pair<T,T>>,std::vector<T>> Solve(T a, T b, std::vector<T> ini);
+
     std::pair<std::vector<T>,std::vector<T>> IterativeSolve(T a, T b,  T ini, unsigned n);
 
     void set_showResult(bool shoresult_) noexcept {showresult=shoresult_;}
