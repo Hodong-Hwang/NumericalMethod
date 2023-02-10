@@ -76,8 +76,7 @@ class NiftyContainer
 template <bool flag, typename T, typename U>
 struct Select
 {
-
-    typedef T Result;
+    typedef T Result; 
 };
 template <typename T, typename U>
 struct Select<false, T, U>

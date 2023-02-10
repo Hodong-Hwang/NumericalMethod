@@ -53,8 +53,8 @@ class Interface
 {
 public:
     virtual void Fun() = 0;
-    24 ...
 };
+
 template <class T, class P>
 Interface *MakeAdapter(const T &obj, const P &arg)
 {
