@@ -4,5 +4,5 @@ project (myproject)
 find_package(Eigen3 REQUIRED)
 add_compile_options(-std:c++17) #optional to use c++17
 
-add_executable (${PROJECT_NAME} EigenTest.cpp)
+add_executable (${PROJECT_NAME} EigenTest02.cpp)
 target_link_libraries (${PROJECT_NAME} Eigen3::Eigen)
