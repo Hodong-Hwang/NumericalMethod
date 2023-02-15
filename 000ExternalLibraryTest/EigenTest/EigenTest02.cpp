@@ -12,28 +12,57 @@ int print_eigen(Eigen::MatrixXd m)
 int main()
 {
     Eigen::MatrixXd test; //3 by 3 double precision matrix initialization
-    Eigen::VectorXf T(15);
-    test.resize(15,15);
+    int size = 9;
+    Eigen::VectorXd T(size);
+    test.resize(size,size);
     // Let's make it a symmetric matrix
-    test(0,0)=1;
-    test(14,14)=1;
-    for(int i=1; i<14; i++)
+
+    int offset =3;
+    test(0,0)=4; 
+    test(0,1)=-1;
+    test(0,offset)=-1;
+    for(int i=1; i<offset; i++)
     {
-        for(int j=i-1; j<14; j++)
-        {
-            int xidx1  = i%5;
-            int yidx1  = i/5;
-
-            int xidx2  = j%5;
-            int yidx2  = j/5;
-            if (xidx1==yidx1) test(i,j)=-4;
-            else if ( (abs(xidx1-xidx2)==1) & (abs(xidx2-yidx2)==1)) test(i,j)=1;
-            else test(i,j)=0;
-        }
+        test(i,i-1)=-1; 
+        test(i,i)=4; 
+        test(i,i+1)=-1;
+        test(i,i+offset)=-1;  
     }
-
+    for(int i=offset; i<size-offset; i++)
+    {
+        test(i,i-offset)=-1; 
+        test(i,i-1)=-1; 
+        test(i,i)=4; 
+        test(i,i+1)=-1;
+        test(i,i+offset)=-1;  
+    }
+    for(int i=size-offset; i<size-1; i++)
+    {
+        test(i,i-offset)=-1; 
+        test(i,i-1)=-1; 
+        test(i,i)=4; 
+        test(i,i+1)=-1;
+    }
+    test(size-1,size-1)=4; 
+    test(size-1,size-2)=-1;
+    test(size-1,size-1-offset)=-1;
     // Print
     print_eigen(test);
+    T[0]=75;
+    T[1]=0;
+    T[2]=50;
+    T[3]=75;
+    T[4]=0;
+    T[5]=50;
+    T[6]=175;
+    T[7]=100;
+    T[8]=150;
+
+    auto T1= test.inverse()*T;
+    print_eigen(T1);
+    std::cout << " ================ "<<std::endl;
+    print_eigen(test.inverse()*T1);
+
 
     return 0;
 }
