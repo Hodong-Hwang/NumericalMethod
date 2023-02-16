@@ -48,12 +48,12 @@ int main()
     test(size-1,size-1-offset)=-1;
     // Print
     print_eigen(test);
-    T[0]=75;
-    T[1]=0;
-    T[2]=50;
-    T[3]=75;
-    T[4]=0;
-    T[5]=50;
+    T[0]=75; // lb + bb
+    T[1]=0;  // bb
+    T[2]=50; // rb
+    T[3]=75; // lb
+    T[4]=0; // center // no
+    T[5]=50; // 
     T[6]=175;
     T[7]=100;
     T[8]=150;
