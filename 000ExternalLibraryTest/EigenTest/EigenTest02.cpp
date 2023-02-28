@@ -1,7 +1,7 @@
 #include <iostream>
 #include <Eigen/Core>
 #include <Eigen/Dense>
-
+#include <fstream>
 int print_eigen(Eigen::MatrixXd m)
 {
     // Eigen Matrices do have rule to print them with std::cout
@@ -9,59 +9,99 @@ int print_eigen(Eigen::MatrixXd m)
     return 0;
 }
 
-int main()
+void Test_RectAngular_Solver(int numnode,double Tl, double Tb, double Tr, double Tt)
 {
+    int size = numnode*numnode;
+    int offset = numnode;
     Eigen::MatrixXd test; //3 by 3 double precision matrix initialization
-    int size = 9;
     Eigen::VectorXd T(size);
     test.resize(size,size);
-    // Let's make it a symmetric matrix
+    for(int i=0; i<size; i++)
+    {
+        T[i]= 0;
+        test(i,i)=4; 
+        int pxidx=i%offset;
+        int pyidx=i/offset;
+        int widx=i-1;
+        int eidx=i+1;
+        int sidx=i-offset;
+        int nidx=i+offset;
 
-    int offset =3;
-    test(0,0)=4; 
-    test(0,1)=-1;
-    test(0,offset)=-1;
-    for(int i=1; i<offset; i++)
-    {
-        test(i,i-1)=-1; 
-        test(i,i)=4; 
-        test(i,i+1)=-1;
-        test(i,i+offset)=-1;  
-    }
-    for(int i=offset; i<size-offset; i++)
-    {
-        test(i,i-offset)=-1; 
-        test(i,i-1)=-1; 
-        test(i,i)=4; 
-        test(i,i+1)=-1;
-        test(i,i+offset)=-1;  
-    }
-    for(int i=size-offset; i<size-1; i++)
-    {
-        test(i,i-offset)=-1; 
-        test(i,i-1)=-1; 
-        test(i,i)=4; 
-        test(i,i+1)=-1;
-    }
-    test(size-1,size-1)=4; 
-    test(size-1,size-2)=-1;
-    test(size-1,size-1-offset)=-1;
-    // Print
-    print_eigen(test);
-    T[0]=75; // lb + bb
-    T[1]=0;  // bb
-    T[2]=50; // rb
-    T[3]=75; // lb
-    T[4]=0; // center // no
-    T[5]=50; // 
-    T[6]=175;
-    T[7]=100;
-    T[8]=150;
+        if (pxidx==0)
+        {
+            T[i]+=Tl;
+        }        
+        else
+        {
+            test(i,widx)=-1;
+        }
+
+        if ((pxidx+1)==offset)
+        {
+            T[i]+=Tr;
+        }
+        else
+        {
+            if (eidx<size)
+            {
+                test(i,eidx)=-1;
+            }
+        }
+
+        if (pyidx==0)
+        {
+            T[i]+=Tb;
+        }
+        else
+        {
+            if (sidx>=0) test(i,sidx)=-1;
+        }
+
+        if ((pyidx+1)==offset)
+        {
+            T[i]+=Tt;
+        }
+        else
+        {
+            if (nidx<size)
+            {
+                test(i,nidx)=-1;
+            }
+        }
+
+       
+    }   
 
     auto T1= test.inverse()*T;
-    print_eigen(T1);
-    std::cout << " ================ "<<std::endl;
-    print_eigen(test.inverse()*T1);
+    Eigen::MatrixXd result;
+    result.resize(offset,offset);
+
+    for (int j= 0 ; j<offset; j++)
+    {
+        for (int i= 0 ; i<offset; i++)
+        {
+            result(j,i)=T1[i+j*offset];
+        }
+    }
+    std::ofstream fs("data.dat");
+    if(fs.is_open())
+    {
+        fs << result <<"\n";
+    }
+    fs.close();
+}
+
+int main()
+{
+    int Dim = 15;
+    // Let's make it a symmetric matrix
+    double Tl=75, Tb=0, Tr=50, Tt=100;   
+    Test_RectAngular_Solver(5,Tl,Tb,Tr,Tt);
+    
+
+
+    // std::cout << " ================ "<<std::endl;
+    // print_eigen(test.inverse()*T1);
 
 
     return 0;

@@ -1,0 +1,15 @@
+cmake_minimum_required (VERSION 3.0)
+project (myproject)
+
+
+ 
+find_package(Eigen3 REQUIRED)
+add_compile_options(-std:c++17) #optional to use c++17
+
+find_package(Python3 COMPONENTS Interpreter Development NumPy)
+FIND_PACKAGE(pybind11 CONFIG)
+add_executable (${PROJECT_NAME} 001.cpp)
+
+target_include_directories(myproject PRIVATE  $ENV{MATPLOTLIB_INCLUDE} ${Python3_INCLUDE_DIRS} ${Python3_NumPy_INCLUDE_DIRS})
+
+target_link_libraries(${PROJECT_NAME} Eigen3::Eigen Python3::Python Python3::NumPy pybind11::headers)
