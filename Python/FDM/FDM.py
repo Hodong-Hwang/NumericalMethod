@@ -13,20 +13,26 @@ class FDM1D:
         """
         self.x=np.linspace(xinfo[0],xinfo[1],node+2) # with out init and end
         self.node =node
-        self.timestep= 0.001 # default value 
+        self.timestep= 0.005 # default value 
         self.tend = runtime
-        self.mu=0.001 #default value 
-        self. u = 2.5
+        self.mu=1e-6 #default value 
+        self. u = 1
     def setInitialCondition(self,U0:np.array):
         self.U0=U0
     
-    def make_SimpleCentralDiff(self):
-        
+    def make_SimpleCentralDiff(self):        
         dx=self.x[1]-self.x[0]
         dx2=dx*dx
         mu=self.mu
         u=self.u
         self.A=np.array([0.5*u/dx+mu/(dx2),-2*mu/(dx2),-0.5*u/dx+mu/(dx2)])
+
+    def make_SimpleBackwardDiff(self):        
+        dx=self.x[1]-self.x[0]
+        dx2=dx*dx
+        mu=self.mu
+        u=self.u
+        self.A=np.array([mu/(dx2)+u/dx,-u/dx-2*mu/(dx2),mu/(dx2)])
  
     def animate(self,i):
         U=self.U
@@ -34,23 +40,18 @@ class FDM1D:
         dt=self.timestep
         xnode =self.node+2
         A=self.A
-        self.U[1]=prevU[1]-dt*A[1:3].dot(prevU[1:3])
+        self.U[1]=prevU[1]+dt*A[1:3].dot(prevU[1:3])
         for i in range(2,self.node+1):  
             U[i]=prevU[i]+dt*A.dot(prevU[i-1:i+2])                                
-        U[xnode-1]=prevU[xnode-1]-dt*A[0:2].dot(prevU[xnode-2:xnode+1])
+        U[xnode-1]=prevU[xnode-1]+dt*A[0:2].dot(prevU[xnode-2:xnode+1])
+        U[0]=U[xnode-1]
         self.line.set_data(self.x, self.U)
         self.U=U
         return self.line,
     
     def animationrun(self):
-        t=0
-        dt=self.timestep
-        Tstep = int(self.tend/dt)
-        xnode =self.node+2
         self.U=self.U0
         self.make_SimpleCentralDiff()
-        A=self.A
-        A.reshape(1,3)
         self.fig = plt.figure()
         self.ax = plt.axes(xlim=(0, 1), ylim=(-2,2))
         self.line, = self.ax.plot(self.x, self.U, lw=3)
